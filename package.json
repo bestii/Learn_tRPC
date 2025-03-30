@@ -1,0 +1,8 @@
+{
+	"dependencies": {
+		"typescript": "~5.8.2",
+		"turbo": "^2.4.4",
+		"eslint": "^9.23.0",
+		"prettier": "^3.5.3"
+	}
+}
