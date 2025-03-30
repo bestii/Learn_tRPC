@@ -1,4 +1,8 @@
 {
+	"scripts": {
+		"server:start": "pnpm --filter server start",
+		"client:start": "pnpm --filter client start"
+	},
 	"dependencies": {
 		"typescript": "~5.8.2",
 		"turbo": "^2.4.4",
