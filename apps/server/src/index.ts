@@ -4,7 +4,11 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "@trpc/shared";
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173/",
+  })
+);
 
 app.use("/trpc", createExpressMiddleware({ router: appRouter }));
 

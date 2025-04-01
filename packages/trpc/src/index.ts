@@ -3,11 +3,20 @@ import { z } from "zod";
 
 const t = initTRPC.create();
 
-export const appRouter = t.router({
-  hello: t.procedure
+export const router = t.router;
+export const publicProcedure = t.procedure;
+
+export const appRouter = router({
+  hello: publicProcedure
     .input(z.object({ name: z.string() }))
     .query(({ input }) => {
       return `Hello, ${input.name}`;
+    }),
+  logToServer: publicProcedure
+    .input(z.object({ message: z.string() }))
+    .mutation(({ input }) => {
+      console.log(input.message);
+      return true;
     }),
 });
 
