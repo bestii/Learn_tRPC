@@ -8,7 +8,7 @@ import { type AppRouter } from "@trpc/shared";
 function App() {
   const [count, setCount] = useState(0);
 
-  const trpc = createTRPCClient<AppRouter>({
+  const client = createTRPCClient<AppRouter>({
     links: [
       httpBatchLink({
         url: "http://localhost:4000/trpc",
@@ -18,10 +18,12 @@ function App() {
 
   const handleOnAdd = async () => {
     setCount((prev) => prev + 1);
-    const result = await trpc.logToServer.mutate({
+    const result = await client.logToServer.mutate({
       message: `Here is the Count: ${count}`,
     });
     console.log("🚀 ~ handleOnAdd ~ result:", result);
+    const user = await client.users.getUser.query();
+    console.log("🚀 ~ handleOnAdd ~ user:", user);
   };
 
   return (

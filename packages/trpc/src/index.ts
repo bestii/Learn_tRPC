@@ -1,10 +1,6 @@
-import { initTRPC } from "@trpc/server";
+import { userRouter } from "./routers/users";
+import { router, publicProcedure } from "./trpc";
 import { z } from "zod";
-
-const t = initTRPC.create();
-
-export const router = t.router;
-export const publicProcedure = t.procedure;
 
 export const appRouter = router({
   hello: publicProcedure
@@ -18,6 +14,7 @@ export const appRouter = router({
       console.log(input.message);
       return input.message;
     }),
+  users: userRouter,
 });
 
 export type AppRouter = typeof appRouter;
