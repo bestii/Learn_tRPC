@@ -1,6 +1,7 @@
-import { userRouter } from "./routers/users.ts";
-import { router, publicProcedure } from "./trpc.ts";
 import { z } from "zod";
+import { createContext } from "./context";
+import { userRouter } from "./routers/users.ts";
+import { publicProcedure, router } from "./trpc.ts";
 
 export const appRouter = router({
   hello: publicProcedure
@@ -18,3 +19,5 @@ export const appRouter = router({
 });
 
 export type AppRouter = typeof appRouter;
+
+export { createContext };

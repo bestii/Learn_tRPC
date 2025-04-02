@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { appRouter } from "@trpc/shared";
+import { appRouter, createContext } from "@trpc/shared";
+import cors from "cors";
+import express from "express";
 
 const app = express();
 app.use(
@@ -10,6 +10,6 @@ app.use(
   })
 );
 
-app.use("/trpc", createExpressMiddleware({ router: appRouter }));
+app.use("/trpc", createExpressMiddleware({ router: appRouter, createContext }));
 
 app.listen(4000, () => console.log("Server running on http://localhost:4000"));

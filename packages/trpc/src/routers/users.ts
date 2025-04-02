@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc.ts";
+import { publicProcedure, router } from "../trpc.js";
 
 const userProcedure = publicProcedure.input(
   z.object({
@@ -19,6 +19,12 @@ export const userRouter = router({
         name: z.string(),
       })
     )
+    .output(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+      })
+    )
     .mutation((req) => {
       console.log(
         `Updating user with id: ${req.input.id} with name ${req.input.name}`
@@ -26,6 +32,7 @@ export const userRouter = router({
       return {
         id: req.input.id,
         name: req.input.name,
+        password: "123456",
       };
     }),
 });
