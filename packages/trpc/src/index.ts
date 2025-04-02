@@ -1,5 +1,5 @@
-import { userRouter } from "./routers/users";
-import { router, publicProcedure } from "./trpc";
+import { userRouter } from "./routers/users.ts";
+import { router, publicProcedure } from "./trpc.ts";
 import { z } from "zod";
 
 export const appRouter = router({

@@ -22,8 +22,13 @@ function App() {
       message: `Here is the Count: ${count}`,
     });
     console.log("🚀 ~ handleOnAdd ~ result:", result);
-    const user = await client.users.getUser.query();
+    const user = await client.users.get.query({ id: "1" });
     console.log("🚀 ~ handleOnAdd ~ user:", user);
+    const updatedUser = await client.users.update.mutate({
+      id: "1",
+      name: "John Doe",
+    });
+    console.log("🚀 ~ handleOnAdd ~ updatedUser:", updatedUser);
   };
 
   return (
