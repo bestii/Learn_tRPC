@@ -18,9 +18,10 @@ function App() {
 
   const handleOnAdd = async () => {
     setCount((prev) => prev + 1);
-    await trpc.logToServer.mutate({
+    const result = await trpc.logToServer.mutate({
       message: `Here is the Count: ${count}`,
     });
+    console.log("🚀 ~ handleOnAdd ~ result:", result);
   };
 
   return (

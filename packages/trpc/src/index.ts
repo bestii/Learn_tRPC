@@ -16,7 +16,7 @@ export const appRouter = router({
     .input(z.object({ message: z.string() }))
     .mutation(({ input }) => {
       console.log(input.message);
-      return true;
+      return input.message;
     }),
 });
 
