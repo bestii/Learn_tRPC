@@ -26,6 +26,7 @@ export const userRouter = router({
       })
     )
     .mutation((req) => {
+      console.log(req.ctx.isAdmin);
       console.log(
         `Updating user with id: ${req.input.id} with name ${req.input.name}`
       );
