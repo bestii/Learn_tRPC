@@ -14,6 +14,11 @@ export const todoRouter = router({
         title: "Buy eggs",
         completed: false,
       },
+      {
+        id: 3,
+        title: "Buy bread",
+        completed: false,
+      },
     ];
   }),
   createTodo: publicProcedure
