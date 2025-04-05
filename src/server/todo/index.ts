@@ -1,5 +1,6 @@
 import { todos } from "@/db/schema";
 import Database from "better-sqlite3";
+import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import { z } from "zod";
@@ -18,18 +19,22 @@ export const todoRouter = router({
     .input(z.object({ content: z.string() }))
     .mutation(async (opts) => {
       db.insert(todos).values({ content: opts.input.content, done: 0 }).run();
-      return "Created";
+      return true;
     }),
   updateTodo: publicProcedure
     .input(
       z.object({
         id: z.number(),
-        content: z.string().optional(),
-        done: z.boolean().optional(),
+        content: z.string(),
+        done: z.number(),
       })
     )
-    .mutation(() => {
-      return "Updated";
+    .mutation(async (opts) => {
+      db.update(todos)
+        .set({ content: opts.input.content, done: opts.input.done })
+        .where(eq(todos.id, opts.input.id))
+        .run();
+      return true;
     }),
   deleteTodo: publicProcedure.input(z.number()).mutation(() => {
     return "Deleted";
