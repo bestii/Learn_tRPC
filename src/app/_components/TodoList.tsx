@@ -1,9 +1,16 @@
 "use client";
 
 import { trpc } from "../_trpc/client";
+import { serverClient } from "../_trpc/serverClient";
 
-const TodoList = () => {
-  const getTodos = trpc.todo.getTodos.useQuery();
+type TodoListProps = {
+  todos: Awaited<ReturnType<typeof serverClient.todo.getTodos>>;
+};
+
+const TodoList = ({ todos }: TodoListProps) => {
+  const getTodos = trpc.todo.getTodos.useQuery(undefined, {
+    initialData: todos,
+  });
   const addTodo = trpc.todo.createTodo.useMutation({
     onSettled: () => {
       getTodos.refetch();
@@ -20,7 +27,7 @@ const TodoList = () => {
   };
 
   const handleUpdateTodo = () => {
-    updateTodo.mutate({ id: 1, content: "New Test", done: 1 });
+    updateTodo.mutate({ id: 2, content: "New Test", done: 1 });
   };
 
   return (
